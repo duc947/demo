@@ -3,6 +3,8 @@ package demo;
 import org.openqa.selenium.*;
 //import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DemoGuru99 {
@@ -15,6 +17,7 @@ public class DemoGuru99 {
 		String  baseurl = "http://demo.guru99.com/v1/";
 		driver.get(baseurl);
 		System.out.println(driver.getTitle());
+		
 //		WebElement userName = driver.findElement(By.name("uid"));
 //		WebElement passWord = driver.findElement(By.xpath("//input[@name='password']"));
 //		userName.sendKeys("duc");
@@ -37,17 +40,21 @@ public class DemoGuru99 {
 //		driver.findElement(By.xpath("//*[@type='text']//following::input[2]")).click();
 //		System.out.println(driver.switchTo().alert().getText());
 //		driver.switchTo().alert().accept();
+//		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		
-		driver.findElement(By.cssSelector("a[class = 'dropdown-toggle']")).click();
+		WebElement navBar = driver.findElement(By.cssSelector("ul[class = 'nav navbar-nav']"));
+		List<WebElement> navBarList = navBar.findElements(By.cssSelector("li.dropdown"));
+		navBarList.get(0).click();//.findElement(By.cssSelector("a.dropdown-toggle")).click();
+//		driver.findElement(By.cssSelector("a[class = 'dropdown-toggle']")).click();
 		System.out.println("open menu");
 		driver.findElement(By.cssSelector("a[href = '../../test/link.html']")).click();
 //		driver.findElement(By.xpath("//a[text()= 'Accessing Link']")).click();
 		System.out.println("click link");
-		driver.findElement(By.cssSelector("img[alt = 'Guru99 Demo Sites']")).click();
-		System.out.println("click img");
+		driver.findElement(By.cssSelector("a[href='http://demo.guru99.com/V1/index.php']")).click();
+		System.out.println("click Bank");
 		
-//		driver.close();
-		driver.quit();
+		driver.close();
+//		driver.quit();
 	}
 
 }
