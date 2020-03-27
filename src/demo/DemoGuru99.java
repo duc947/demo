@@ -12,8 +12,8 @@ public class DemoGuru99 {
 	{
 		System.setProperty("webdriver.gecko.driver", "D:\\Work\\Selenium\\geckodriver.exe");
 		System.setProperty("webdriver.chrome.driver","D:\\Work\\Selenium\\chromedriver.exe");
-		WebDriver driver = new FirefoxDriver();
-//		WebDriver driver = new ChromeDriver();
+//		WebDriver driver = new FirefoxDriver();
+		WebDriver driver = new ChromeDriver();
 		
 		String  baseurl = "http://demo.guru99.com/v1/";
 		driver.get(baseurl);
