@@ -18,10 +18,10 @@ public class DemoGuru99 {
 		String  baseurl = "http://demo.guru99.com/v1/";
 		driver.get(baseurl);
 		System.out.println(driver.getTitle());
-		driver.manage().window().maximize();
+//		driver.manage().window().maximize();
 		
 		WebElement userName = driver.findElement(By.name("uid"));
-		WebElement passWord = driver.findElement(By.xpath("//input[@name='password']"));
+		WebElement passWord = driver.findElement(By.xpath("//input[@name = 'password']"));
 		userName.sendKeys("duc");
 		passWord.sendKeys("zxcasdqwe321");
 		System.out.println("xpath");
@@ -29,15 +29,15 @@ public class DemoGuru99 {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("here")).click();
 		System.out.println("text()");
-		driver.findElement(By.xpath("//*[text()='Email ID']//following::input")).sendKeys("ngoc-duc");
+		driver.findElement(By.xpath("//*[text() = 'Email ID']//following::input")).sendKeys("ngoc-duc");
 		System.out.println("following");
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		driver.navigate().back();
 		
-		driver.findElement(By.xpath("//*[text()='UserID']//following::input")).clear();
-		driver.findElement(By.xpath("//*[@type='text']//following::input")).sendKeys("12345678");
+		driver.findElement(By.xpath("//*[text() = 'UserID']//following::input")).clear();
+		driver.findElement(By.xpath("//*[@type = 'text']//following::input")).sendKeys("12345678");
 		System.out.println("following");
-		driver.findElement(By.xpath("//*[text()='Password']//preceding::input")).sendKeys("abcdef");
+		driver.findElement(By.xpath("//*[text() ='Password']//preceding::input")).sendKeys("abcdef");
 		System.out.println("preceding");
 		driver.findElement(By.xpath("//*[@type='text']//following::input[2]")).click();
 		System.out.println(driver.switchTo().alert().getText());
@@ -53,10 +53,10 @@ public class DemoGuru99 {
 		driver.findElement(By.cssSelector("a[href = '../../test/link.html']")).click();
 //		driver.findElement(By.xpath("//a[text()= 'Accessing Link']")).click();
 		System.out.println("click link");
-		driver.findElement(By.cssSelector("a[href='http://demo.guru99.com/V1/index.php']")).click();
+		driver.findElement(By.cssSelector("a[href ='http://demo.guru99.com/V1/index.php']")).click();
 		System.out.println("click Bank");
 		
-		driver.close();
+//		driver.close();
 //		driver.quit();
 		
 		System.out.println("close");
