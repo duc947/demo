@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DemoGuru99 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		WebDriver driver;
 		System.setProperty("webdriver.gecko.driver", "D:\\Work\\Selenium\\geckodriver.exe");
@@ -38,7 +38,6 @@ public class DemoGuru99 {
 				.keyUp(userName, Keys.SHIFT)
 				.doubleClick(userName)
 				.contextClick()
-				.click()
 				.build();
 		seriesOfActions.perform() ;
 		System.out.println("keyboard mouse events");
@@ -48,7 +47,6 @@ public class DemoGuru99 {
 		System.out.println("text()");
 		driver.findElement(By.xpath("//*[text() = 'Email ID']//following::input")).sendKeys("ngoc-duc");
 		System.out.println("following");
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		driver.navigate().back();
 		
 		driver.findElement(By.xpath("//*[text() = 'UserID']//following::input")).clear();
@@ -61,21 +59,20 @@ public class DemoGuru99 {
 		driver.switchTo().alert().accept();
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		
-		WebElement navBar = driver.findElement(By.cssSelector("ul[class = 'nav navbar-nav']"));
+		WebElement navBar = driver.findElement(By.xpath("//*[@class = 'nav navbar-nav']"));
 		List<WebElement> navBarList = navBar.findElements(By.cssSelector("li.dropdown"));
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		navBarList.get(0).click();//findElement(By.cssSelector("a.dropdown-toggle")).click();
-//		driver.findElement(By.cssSelector("a[class = 'dropdown-toggle']")).click();
+		Thread.sleep(1000);
+		navBarList.get(0).click();
+//		JavascriptExecutor executor = (JavascriptExecutor)driver;
+//		executor.executeScript("arguments[0].click();", navBarList.get(0));
 		System.out.println("open menu");
 		driver.findElement(By.cssSelector("a[href = '../../test/link.html']")).click();
-//		driver.findElement(By.xpath("//a[text()= 'Accessing Link']")).click();
 		System.out.println("click link");
 		driver.findElement(By.cssSelector("a[href ='http://demo.guru99.com/V1/index.php']")).click();
 		System.out.println("click Bank");
 		
-//		driver.close();
 //		driver.quit();
-		
+		driver.close();
 		System.out.println("close");
 	}
 
