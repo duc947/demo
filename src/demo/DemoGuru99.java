@@ -3,6 +3,8 @@ package demo;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -10,11 +12,13 @@ import java.util.concurrent.TimeUnit;
 public class DemoGuru99 {
 	public static void main(String[] args)
 	{
+		WebDriver driver;
 		System.setProperty("webdriver.gecko.driver", "D:\\Work\\Selenium\\geckodriver.exe");
-		System.setProperty("webdriver.chrome.driver","D:\\Work\\Selenium\\chromedriver.exe");
-//		WebDriver driver = new FirefoxDriver();
-		WebDriver driver = new ChromeDriver();
+		driver = new FirefoxDriver();
+//		System.setProperty("webdriver.chrome.driver","D:\\Work\\Selenium\\chromedriver.exe");
+//		driver = new ChromeDriver();
 		
+		Actions builder = new Actions(driver);
 		String  baseurl = "http://demo.guru99.com/v1/";
 		driver.get(baseurl);
 		System.out.println(driver.getTitle());
@@ -25,6 +29,19 @@ public class DemoGuru99 {
 		userName.sendKeys("duc");
 		passWord.sendKeys("zxcasdqwe321");
 		System.out.println("xpath");
+		
+		Action seriesOfActions = builder
+				.moveToElement(userName)
+				.click()
+				.keyDown(userName, Keys.SHIFT)
+				.sendKeys(userName, "hello")
+				.keyUp(userName, Keys.SHIFT)
+				.doubleClick(userName)
+				.contextClick()
+				.click()
+				.build();
+		seriesOfActions.perform() ;
+		System.out.println("keyboard mouse events");
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.linkText("here")).click();
