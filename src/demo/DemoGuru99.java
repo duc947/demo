@@ -12,6 +12,16 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class DemoGuru99 {
+	static void openMenu(WebDriver driver) throws InterruptedException {
+		WebElement navBar = driver.findElement(By.xpath("//*[@class = 'nav navbar-nav']"));
+		List<WebElement> navBarList = navBar.findElements(By.cssSelector("li.dropdown"));
+		Thread.sleep(1000);
+		navBarList.get(0).click();
+//		JavascriptExecutor executor = (JavascriptExecutor)driver;
+//		executor.executeScript("arguments[0].click();", navBarList.get(0));
+		System.out.println("open menu");
+	}
+	
 	public static void main(String[] args) throws InterruptedException
 	{
 		WebDriver driver;
@@ -84,18 +94,30 @@ public class DemoGuru99 {
 		driver.switchTo().alert().accept();
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		
-		WebElement navBar = driver.findElement(By.xpath("//*[@class = 'nav navbar-nav']"));
-		List<WebElement> navBarList = navBar.findElements(By.cssSelector("li.dropdown"));
-		Thread.sleep(1000);
-		navBarList.get(0).click();
-//		JavascriptExecutor executor = (JavascriptExecutor)driver;
-//		executor.executeScript("arguments[0].click();", navBarList.get(0));
-		System.out.println("open menu");
+		openMenu(driver);		
 		driver.findElement(By.cssSelector("a[href = '../../test/link.html']")).click();
 		driver.findElement(By.cssSelector("a[href ='http://demo.guru99.com/V1/index.php']")).click();
+		
+		openMenu(driver);
 		driver.findElement(By.cssSelector("a[href = '../../test/radio.html']")).click();
-		
-		
+		List<WebElement> radioList = driver.findElements(By.cssSelector("input[type = 'radio']"));
+		radioList.get(0).click();
+		radioList.get(1).click();
+		radioList.get(2).click();
+		radioList.get(1).click();
+		radioList.get(0).click();
+		radioList.get(2).click();
+		driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox1']")).click();
+		while(driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox1']")).isSelected() 
+				|| driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox3']")).isSelected())
+		{
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox2']")).click();
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox3']")).click();
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox2']")).click();
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox1']")).click();
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox2']")).click();
+			driver.findElement(By.cssSelector("input[type = 'checkbox'][value = 'checkbox3']")).click();
+		}
 //		driver.findElement(By.cssSelector("a[href = '../../test/link.html']")).click();
 		
 		
